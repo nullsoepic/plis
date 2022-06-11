@@ -22,7 +22,7 @@ printf "${YE}   Made by MeVibing aka NullDev\n"
 printf "${YE}       github.com/nullsoepic\n \n"
 
 printf "${GR} Beginning uninstall process\n \n"
-printf "${RE} This process will remove all panel and wings data including servers/backuos(optionally), this is irreversible, do you wish to proceed? [y/N] "
+printf "${RE} This process will remove all panel and wings data including servers/backups(optionally), this is irreversible, do you wish to proceed? [y/N] "
 read CONF
 case "$CONF" in 
   y|Y ) printf "${GR} Confirmed, continuing..\n";;
@@ -64,10 +64,10 @@ printf "${GR}   Removing panel files(this may take a bit)..\n"
 sudo rm -rf /var/www/pterodactyl
 printf "${GR}   Removing queue worker.. \n"
 sudo rm /etc/systemd/system/pteroq.service
-if [[$WS = "Apache"]]; then
+if [[ $WS = "Apache" ]]; then
 printf "${GR}   Removing apache config link \n"
 sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf
-elif [[$WS = "Nginx"]]; then
+elif [[ $WS = "Nginx" ]]; then
 printf "${GR}   Removing nginx config link \n"
 sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf
 else
