@@ -49,14 +49,14 @@ esac
 printf "${YE} MySQL/MariaDB panel user? [Default: panel']"
 read PDBU
 case "$PDBU" in 
-  " " ) printf "${GR} Using default user \'panel\'... \n" DBU = 'panel';;
+  "" ) printf "${GR} Using default user \'panel\'... \n" DBU = 'panel';;
   * ) printf "${GR} Using custom user \'${PDBU}\'... \n" DBU = $PDBU;;
 esac
 
 printf "${YE} MySQL/MariaDB panel database? [Default: pterodactyl]"
 read PDBD
 case "$PDBD" in 
-  " " ) printf "${GR} Using default database \'pterodactyl\'... \n" DBD = 'pterodactyl';;
+  "" ) printf "${GR} Using default database \'pterodactyl\'... \n" DBD = 'pterodactyl';;
   * ) printf "${GR} Using custom database \'${PDBD}\' \n" DBD = PDBD;;
 esac
 
