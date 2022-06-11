@@ -30,7 +30,7 @@ case "$CONF" in
   * ) printf "${GR} Exiting..\n" exit 0;;
 esac
 
-printf "${YE} Do you use Nginx or Apache? [n/a]"
+printf "${YE} Do you use Nginx or Apache? [n/a] "
 read WSS
 case "$WSS" in 
   n|N ) printf "${GR} Selected Nginx..\n" WS = "Apache";;
@@ -38,7 +38,9 @@ case "$WSS" in
   * ) printf "${RE} Invalid Option..\n" exit 0;;
 esac
 
-printf "${YE} Do you want to remove server files and backups? [y/N]"
+printf "${WS}"
+
+printf "${YE} Do you want to remove server files and backups? [y/N] "
 read RMSO
 case "$RMSO" in 
   y|Y ) printf "${GR} Server files will be removed\n" RMS = true;;
@@ -46,14 +48,14 @@ case "$RMSO" in
   * ) printf "${GR} Server files will NOT be removed\n" RMS = false;;
 esac
 
-printf "${YE} MySQL/MariaDB panel user? [Default: panel']"
+printf "${YE} MySQL/MariaDB panel user? [Default: panel] "
 read PDBU
 case "$PDBU" in 
   "" ) printf "${GR} Using default user \'panel\'... \n" DBU = 'panel';;
   * ) printf "${GR} Using custom user \'${PDBU}\'... \n" DBU = $PDBU;;
 esac
 
-printf "${YE} MySQL/MariaDB panel database? [Default: pterodactyl]"
+printf "${YE} MySQL/MariaDB panel database? [Default: pterodactyl] "
 read PDBD
 case "$PDBD" in 
   "" ) printf "${GR} Using default database \'pterodactyl\'... \n" DBD = 'pterodactyl';;
