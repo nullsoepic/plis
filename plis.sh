@@ -14,7 +14,6 @@ printf "${BL} *******  **       **  ********
 /**      /**      /**       /**
 /**      /********/** ******** 
 //       //////// // ////////  ${NC}
-
 "
 
 printf "${YE} A quick pterodactyl uninstaller\n"
@@ -33,12 +32,22 @@ esac
 printf "${YE} Do you use Nginx or Apache? [n/a] "
 read WSS
 case "$WSS" in 
-  n|N ) printf "${GR} Selected Nginx..\n" WS = "Apache";;
-  a|A ) printf "${GR} Selected Apache..\n" WS = "Nginx";;
+  n|N ) printf "${GR} Selected Nginx..\n";;
+  a|A ) printf "${GR} Selected Apache..\n";; 
   * ) printf "${RE} Invalid Option..\n" exit 0;;
 esac
 
-printf "${WS}"
+if [ "$WSS" = "n" ]; then
+WS=Nginx
+elif [ "$WSS" = "a" ]; then
+WS=Apache
+fi
+
+if [ "$WSS" = "N" ]; then
+WS=Nginx
+elif [ "$WSS" = "A" ]; then
+WS=Apache
+fi
 
 printf "${YE} Do you want to remove server files and backups? [y/N] "
 read RMSO
@@ -66,12 +75,13 @@ printf "${GR}   Removing panel files(this may take a bit)..\n"
 sudo rm -rf /var/www/pterodactyl
 printf "${GR}   Removing queue worker.. \n"
 sudo rm /etc/systemd/system/pteroq.service
-if [[ $WS = "Apache" ]]; then
+if [ "$WS" = "Apache" ]; then
 printf "${GR}   Removing apache config link \n"
 sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf
-elif [[ $WS = "Nginx" ]]; then
-printf "${GR}   Removing nginx config link \n"
-sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf
+
+elif [ "$WS" = "Nginx" ]; then
+    printf "${GR}Removing nginx config link \n"
+    sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf
 else
 printf "${RE}   An error occured? Exiting... \n"
 exit 0
